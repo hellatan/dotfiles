@@ -38,6 +38,15 @@ else
     source ~/.zshrc
 fi
 
+if [ ! -d ~/.vim ]; then
+    cd ~/
+    git clone git@github.com:hellatan/.vim.git ~/.vim
+    cd ~/.vim
+    git fetch --all
+else
+    echo ""
+fi
+
 if [ -f ~/.vimrc ];then
     echo "~/.vimrc file already exist. not symlinking"
 else 
