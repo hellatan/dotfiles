@@ -1,0 +1,85 @@
+export SASS_LIBSASS_PATH=/Users/daletan/git_repos/libsass
+
+function mergerepos () {
+    git co master
+    git pull upstream master
+    git co release
+    git pull upstream release
+    echo '-------- merging master to release'
+    git merge master
+    git co develop
+    git pull upstream develop
+    echo '-------- merging release to develop'
+    git merge release
+}
+
+alias mergerepo=mergerepos
+
+alias ..='cd ../'
+alias ....='cd ../../'
+alias ......='cd ../../../'
+alias ........='cd ../../../../'
+
+alias qa='ssh dale@qa'
+alias mcperson='ssh dale@mcperson'
+alias honeysuckle='ssh dale@honeysuckle'
+alias finding='ssh dale@finding'
+alias growth='ssh dale@growth'
+
+alias wpprod='ssh dale@172.20.200.108'
+alias wpstage='ssh dale@172.20.99.145'
+
+alias ls='ls -la'
+
+alias vb='vim ~/.dotfiles/.zshrc'
+alias sb='source ~/.zshrc'
+
+alias vz='vim ~/.dotfiles/.zprofile'
+alias sz='source ~/.zprofile'
+
+alias va='vim ~/.dotfiles/.aliases'
+alias sa='source ~/.aliases'
+
+alias vagpuppet='com && vagrant ssh -c "puppet agent --no-daemonize --verbose --onetime" && vagrant provision'
+
+alias ghcom='cd ~/gh-updates/1stdibs.com'
+alias 1stdibs='cd ~/projects/'
+alias com='cd ~/projects/1stdibs.com/' 
+alias v2='cd ~/projects/1stdibs-admin-v2'
+alias dibs='com && cd dibs'
+alias build='cd ~/projects/1stdibs.com/dibs/build/'
+
+alias ci='composer install'
+alias cu='composer update'
+alias composer.phar='composer'
+
+alias dibsci='dibs && ci'
+alias dibscu='dibs && cu'
+
+alias gtree='git log --graph --pretty=oneline --abbrev-commit --all'
+alias gpru='gpru'
+alias gsu='git submodule update'
+alias gb='git branch'
+alias gs='git status'
+
+# in ~/.bashrc: 
+alias prettygit='prettygit'
+alias ga='gitadd'
+alias gd='gitdiff'
+alias gp='gitpatch'
+alias gco='gitcheckout'
+alias glog='gitlog'
+alias gcon='gitconflict'
+
+# scp -i ~/.vagrant.d/insecure_private_key -P 2222 ~/Downloads/devbox.intranet-storefronts.conf  root@localhost:/data/configuration/
+
+# phpunit command setup
+# ./bin/phpunit --exclude-group mock-server,xdebug,smtp --testdox --group SearchStrings -c ./1stdibs/dibslibs/phpunit.xml
+
+function gpru() {
+    if [ $# -eq 0 ]; then
+        echo "You must pass in a branch name"
+    else
+        git pull --rebase upstream $1
+    fi
+}

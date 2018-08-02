@@ -1,0 +1,104 @@
+
+gitcommands=( "show" "co" "checkout" "diff" "add" "patch" )
+
+contains() {
+    isSet=false
+    for command in ${gitcommands[@]}; do
+        if [[  "$1" == $command ]]; then
+            isSet=true
+            break
+        fi
+    done
+    echo "$isSet"
+}
+
+gitfunc() {
+    local hasCommand=$(contains $1)
+    if [ $hasCommand == true ]; then
+        case "$1" in
+            show)
+                git show --pretty="format:" --name-only $1
+                ;;
+
+        esac
+    fi
+}
+
+prettygit () {
+    if [ -z "$1" ]
+    then
+        echo "ERROR: Must provide a git hash"
+    else
+        git show --pretty="format:" --name-only $1
+    fi
+}
+
+function gitcheckout() {
+    if [ -z "$1" ]; then
+        echo "ERROR: Must provide a branch name or file path"
+    else
+        for i in $*; do
+                git co $i
+        done
+        # git co $1
+    fi
+}
+
+function gitdiff() {
+    if [ -z "$1" ]; then
+        echo "ERROR: Must provide a file path"
+    else
+        for i in $*; do
+            git diff $i
+        done
+    fi
+}
+
+function gitadd() {
+    if [ -z "$1" ]; then
+        echo "ERROR: Must provide a file path"
+    else
+        for i in $*; do
+                git --no-pager add $i
+        done
+        # git add $1
+    fi
+
+}
+
+function gitpatch() {
+    if [ -z "$1" ]; then
+        echo "ERROR: Must provide a file path"
+    else
+        for i in $*; do
+                git --no-pager co $i
+        done
+        # git add -p $1
+    fi
+}
+
+function gitlog() {
+    local re="^[0-9]+$"
+    local num=5
+    local flags="--decorate"
+    local oneline=false
+    for i in $*; do
+        if [ "$i" == "--oneline" ]; then
+            local flags+=" --oneline"
+        fi
+        if [[ "$i" =~ $re ]]; then
+            local num=$i
+        fi
+    done
+    git --no-pager log $flags -n $num
+}
+
+function gitconflict() {
+    if [ -z "$1" ]; then
+        echo "ERROR: Must provide a file path"
+    else
+        for i in $*; do
+            git co --conflict=diff3 $i
+        done
+    fi   
+}
