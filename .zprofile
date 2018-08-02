@@ -34,7 +34,6 @@ export SELENIUM_JAR=/usr/local/bin/selenium-server-standalone.jar
 export PATH=$PATH:$GEM_HOME:/usr/local/share/npm/bin:/usr/local/bin:~/bin:./node_modules/.bin
 export JAVA_HOME=$(/usr/libexec/java_home)
 export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
-export HOMEBREW_GITHUB_API_TOKEN=4a53802f95a9b96b049068266b11328eba7360c3
 
 # mysql setup
 export PATH=$PATH:/usr/local/git/bin:/usr/local/pear/bin:/usr/local/mysql/bin
@@ -48,6 +47,7 @@ else
     echo "rbenv command not installed"
 fi
 export PATH="/usr/local/opt/node@8/bin:$HOME/.yarn/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/opt/gettext/bin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
