@@ -1,10 +1,24 @@
-syntax on
-set number
-set tabstop=4 shiftwidth=4 expandtab
-set nolist
-set ignorecase
+syntax on " color coding
+syntax enable " enable syntax processing
+
+colorscheme twilight
+
+set nolist " do not show end of line character
+set ignorecase " ignorecase in search patterns
 set textwidth=100
-set guicursor=i:ver25-iCursor
+set guicursor=i:ver25-iCursor " what the cursor should look like
+
+set expandtab " spaces are better than a tab character
+set smarttab
+set shiftwidth=4 " tab width
+set softtabstop=4
+
+set mouse=a " mouse support in console
+
+set number " line numbers
+
+set showcmd " show command in bottom bar
+set cursorline " show current line cursor is on
 
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~ "iTerm"

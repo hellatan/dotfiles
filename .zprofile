@@ -42,7 +42,11 @@ export PATH=$PATH:/usr/local/git/bin:/usr/local/pear/bin:/usr/local/mysql/bin
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if [[ "$(command -v rbenv)" ]]; then
+    eval "$(rbenv init -)"
+else
+    echo "rbenv command not installed"
+fi
 export PATH="/usr/local/opt/node@8/bin:$HOME/.yarn/bin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
